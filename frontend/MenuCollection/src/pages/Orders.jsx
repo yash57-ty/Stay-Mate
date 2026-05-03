@@ -10,10 +10,9 @@ function Orders() {
 
   const navigate = useNavigate();
 
-  // Fetches orders, filters invalid entries, and sorts by latest
   const fetchOrders = async () => {
     try {
-      const res = await fetch("/api/api/orders", {
+      const res = await fetch("http://localhost:8080/api/orders", {
         headers: {
           "X-USER-PHONE": localStorage.getItem("userPhone"),
         },
@@ -70,7 +69,7 @@ function Orders() {
 
     try {
       const res = await fetch(
-        `/api/api/orders/${selectedOrder.orderId}/cancel`,
+        `http://localhost:8080/api/orders/${selectedOrder.orderId}/cancel`,
         {
           method: "PUT",
           headers: {

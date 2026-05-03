@@ -23,7 +23,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -57,7 +57,7 @@ function Login() {
     e.preventDefault();
   
     try {
-      const res = await fetch("/api/auth/forgot-password", {
+      const res = await fetch("http://localhost:8080/auth/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

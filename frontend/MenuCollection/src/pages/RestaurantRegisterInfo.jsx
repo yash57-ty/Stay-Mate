@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 
 function RestaurantRegisterInfo() {
   const navigate = useNavigate();
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#F9F9F9] px-4">
 
@@ -23,7 +22,6 @@ function RestaurantRegisterInfo() {
           </p>
         </div>
 
-        {/* Contact information */}
         <div className="space-y-6">
 
           <div className="group bg-gray-50 p-6 rounded-[2rem] hover:bg-[#1A1D23] transition-all duration-300">
@@ -31,7 +29,7 @@ function RestaurantRegisterInfo() {
               Official Line
             </p>
             <p className="text-lg font-black text-[#1A1D23] group-hover:text-white">
-              +91 8799525425
+              +91 9510607101
             </p>
           </div>
 

@@ -5,7 +5,6 @@ function AdminDashboard() {
   const navigate = useNavigate();
   const studentName = localStorage.getItem("name");
 
-  // Clears session data and redirects to login
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login", { replace: true });

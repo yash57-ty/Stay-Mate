@@ -3,8 +3,6 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const navigate = useNavigate();
   const studentName = localStorage.getItem("name");
-
-  // Handles user logout by clearing session data and redirecting to login
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login", { replace: true });
@@ -13,7 +11,6 @@ function Dashboard() {
   return (
     <div className="min-h-screen bg-[#FDFCFB] text-[#1A1D23]">
 
-      {/* Top navigation bar */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 px-6 py-4">
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           
