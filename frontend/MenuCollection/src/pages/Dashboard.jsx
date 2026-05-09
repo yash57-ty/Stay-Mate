@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const navigate = useNavigate();
   const studentName = localStorage.getItem("name");
+  const role=localStorage.getItem("role")==="PGowner";
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login", { replace: true });
@@ -15,7 +16,7 @@ function Dashboard() {
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           
           <h1 className="text-xl font-black tracking-tighter text-[#FF4757]">
-            GOURMET.
+            Book Anything.
           </h1>
 
           <div className="flex items-center gap-4">
@@ -36,20 +37,9 @@ function Dashboard() {
       {/* Main dashboard content */}
       <main className="max-w-6xl mx-auto px-6 py-12">
 
-        {/* Intro section */}
-        <div className="mb-14">
-          <h2 className="text-5xl font-black leading-none mb-4">
-            Hungry?<br />
-            <span className="text-[#FF4757]">Let's fix that.</span>
-          </h2>
-
-          <p className="text-gray-400 font-medium max-w-sm">
-            The best flavors from your city, delivered to your screen.
-          </p>
-        </div>
-
-        {/* Navigation cards */}
+        {/* Navigation Pg */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        
 
           {/* Menu navigation card */}
           <div
@@ -70,6 +60,51 @@ function Dashboard() {
 
             <button className="text-sm font-black text-[#FF4757] uppercase tracking-widest border-b-2 border-[#FF4757] pb-1">
               Explore Now
+            </button>
+          </div>
+          {/* Orders navigation card */}
+
+          
+          {role && <div
+          onClick={()=>navigate("/Pgform")}
+            className="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-50"
+          >
+            <div className="bg-orange-50 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+             ➕🏠 
+            </div>
+
+            <h3 className="text-2xl font-black mb-2 tracking-tight">
+              PG
+            </h3>
+
+            <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+              Add PG and give for rent.
+            </p>
+
+            <button className="text-sm font-black text-[#1A1D23] uppercase tracking-widest border-b-2 border-[#1A1D23] pb-1">
+              View History
+            </button>
+          </div>}
+
+
+          <div
+            onClick={()=>navigate("/Showpg")}
+            className="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-50"
+          >
+            <div className="bg-orange-50 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+            🏠 
+            </div>
+
+            <h3 className="text-2xl font-black mb-2 tracking-tight">
+              PG
+            </h3>
+
+            <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+              Discover PG and Book Appointment.
+            </p>
+
+            <button className="text-sm font-black text-[#1A1D23] uppercase tracking-widest border-b-2 border-[#1A1D23] pb-1">
+              View History
             </button>
           </div>
 

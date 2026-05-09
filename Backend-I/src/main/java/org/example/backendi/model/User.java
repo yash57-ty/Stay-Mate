@@ -27,6 +27,9 @@ public class User {
     @Column(nullable = false)
     String email;
 
+    @Column(nullable = false)
+    String gender;
+
     private String role;
 
 

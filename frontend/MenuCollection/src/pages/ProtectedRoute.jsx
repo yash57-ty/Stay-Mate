@@ -39,10 +39,18 @@ function ProtectedRoute({ children, allowedRole }) {
     return <Navigate to="/login" replace />;
   }
 
-  // Role mismatch
-  if (allowedRole && role !== allowedRole) {
-    return <Navigate to="/login" replace />;
+  if (allowedRole) {
+  if (Array.isArray(allowedRole)) {
+    if (!allowedRole.includes(role)) {
+      return <Navigate to="/login" replace />;
+    }
   }
+  else {
+    if (role !== allowedRole) {
+      return <Navigate to="/login" replace />;
+    }
+  }
+}
 
   return children;
 }

@@ -19,6 +19,10 @@ export default function MainLayout({ children }) {
         return "Browse Menus";
       case "/admin":
         return "Restaurant Analytics";
+      case "/Pg":
+        return "Pg Detail"
+      case "/Pgform":
+        return "Add PG Detail"
       default:
         return "Dashboard";
     }
@@ -48,9 +52,7 @@ export default function MainLayout({ children }) {
           {/* Navigation menu */}
           <nav className="flex items-center bg-gray-100 p-1.5 rounded-2xl">
             {[
-              { name: "Home", path: homePath },
-              { name: "Menu", path: "/menus" },
-              { name: "Orders", path: "/orders" }
+              { name: "Home", path: homePath }
             ].map((nav) => (
               <Link
                 key={nav.name}

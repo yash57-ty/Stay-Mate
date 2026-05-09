@@ -33,19 +33,20 @@ function Login() {
         alert("Invalid credentials");
         return;
       }
-
+    
       const user = await res.json();
+      console.log(user.role)
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("role", user.role);
       localStorage.setItem("name", user.name);
       localStorage.setItem("userPhone", user.phone);
 
-      if (user.role === "User") {
+      if (user.role === "User" || user.role === "PGowner") {
         navigate("/dashboard", { replace: true });
       } else if (user.role === "Admin") {
         navigate("/Admin-dashboard", { replace: true });
-      }
+      } 
 
     } catch (err) {
       console.error(err);

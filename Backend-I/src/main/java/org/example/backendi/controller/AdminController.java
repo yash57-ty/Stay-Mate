@@ -32,4 +32,22 @@ public class AdminController {
     ) {
         return adminService.getRestaurant(page, size, month);
     }
+
+    
+    @GetMapping("/getPgCities")
+    public ResponseEntity<List<String>> getAllPgCitiesController(){
+        return adminService.getpgcities();
+    }
+    
+    @GetMapping("/getPg")
+    public ResponseEntity<?> getPg(
+            @RequestParam(required=false) String city){
+        System.out.println(city);
+        return adminService.getpg(city);
+    }
+
+    @PostMapping("/confirm/{id}/{result}")
+    public ResponseEntity<?> confirmPgController(@PathVariable Long id,@PathVariable String result){
+        return adminService.confirmPg(id,result);
+    }
 }

@@ -18,7 +18,7 @@ function AdminDashboard() {
         <h1 className="text-xl font-black">
           ADMIN <span className="text-gray-300">|</span>{" "}
           <span className="text-[#FF4757]">{studentName}</span>
-        </h1>
+        </h1> 
 
         <button
           onClick={handleLogout}
@@ -52,6 +52,12 @@ function AdminDashboard() {
               path: "/menus"
             },
             {
+              title: "PG",
+              desc: "Check the Pg detail",
+              icon: "🏠",
+              path: "/Pg"
+            },
+            {
               title: "Order Logs",
               desc: "Review all transactions",
               icon: "📦",
@@ -62,6 +68,11 @@ function AdminDashboard() {
               desc: "Real-time performance",
               icon: "📊",
               path: "/admin"
+            },{
+              title: "Select Pg",
+              desc: "Select pg and book Appointment",
+              icon: "🏠",
+              path: "/Showpg"
             }
           ].map((card) => (
             <div

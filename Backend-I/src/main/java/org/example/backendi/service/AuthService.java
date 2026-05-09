@@ -15,16 +15,22 @@ public class AuthService {
     private UserRepository userRepository;
 
     public void signup(SignupRequest request) {
+        System.out.println("Hello1");
         User existing = userRepository.findByPhone(request.phone());
         if (existing != null) {
             throw new RuntimeException("User already exists");
         }
-
+        System.out.println(request.toString());
         User user = new User();
         user.setName(request.name());
+        user.setGender(request.gender());
         user.setPhone(request.phone());
         user.setEmail(request.email());
-        user.setRole("User");
+        if(request.role()==true) {
+            user.setRole("PGowner");
+            System.out.println("hi");
+        }
+        else user.setRole("User");
         user.setPassword(request.password());
 
         userRepository.save(user);

@@ -8,8 +8,11 @@ import Orders from "./pages/Orders";
 import AdminDashboard from "./pages/AdminDashboard";
 import Admin from "./pages/Admin";
 import MainLayout from "./layouts/MainLayout";
+import Pgform from "./pages/Pgform"
 import ProtectedRoute from "./pages/ProtectedRoute";
+import Pg from "./pages/Pg"
 import RestaurantRegisterInfo from "./pages/RestaurantRegisterInfo";
+import Showpg from "./pages/Showpg";
 
 const isLoggedIn = () =>
   localStorage.getItem("isLoggedIn") === "true";
@@ -31,8 +34,30 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute allowedRole="User">
+            <ProtectedRoute allowedRole={["User","PGowner"]}>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+        path="/Showpg"
+        element={
+          <ProtectedRoute allowedRole={["User","PGowner","Admin"]}>
+            <MainLayout>
+            <Showpg/>
+            </MainLayout>
+          </ProtectedRoute>
+        }
+        />
+
+        <Route
+          path="/Pgform"
+          element={
+            <ProtectedRoute allowedRole="PGowner">
+              <MainLayout>
+            <Pgform/>
+            </MainLayout>
             </ProtectedRoute>
           }
         />
@@ -45,6 +70,18 @@ function App() {
               <AdminDashboard />
             </ProtectedRoute>
           }
+        />
+
+        {}
+        <Route
+        path="/pg"
+        element={
+          <ProtectedRoute allowedRole="Admin">
+            <MainLayout>
+              <Pg/>
+              </MainLayout>
+            </ProtectedRoute>
+        }
         />
 
         {/* Admin Analytics Page */}
