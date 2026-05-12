@@ -35,12 +35,14 @@ function Login() {
       }
     
       const user = await res.json();
+      console.log(user)
       console.log(user.role)
 
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("role", user.role);
       localStorage.setItem("name", user.name);
       localStorage.setItem("userPhone", user.phone);
+      localStorage.setItem("gender",user.gender);
 
       if (user.role === "User" || user.role === "PGowner") {
         navigate("/dashboard", { replace: true });

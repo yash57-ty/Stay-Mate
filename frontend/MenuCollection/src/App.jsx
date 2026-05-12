@@ -13,6 +13,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import Pg from "./pages/Pg"
 import RestaurantRegisterInfo from "./pages/RestaurantRegisterInfo";
 import Showpg from "./pages/Showpg";
+import ManagePg from "./pages/ManagePg";
 
 const isLoggedIn = () =>
   localStorage.getItem("isLoggedIn") === "true";
@@ -47,6 +48,16 @@ function App() {
             <MainLayout>
             <Showpg/>
             </MainLayout>
+          </ProtectedRoute>
+        }
+        />
+        <Route
+        path="/ManagePg"
+        element={
+          <ProtectedRoute allowedRole="PGowner">
+            <MainLayout>
+              <ManagePg/>
+            </MainLayout> 
           </ProtectedRoute>
         }
         />

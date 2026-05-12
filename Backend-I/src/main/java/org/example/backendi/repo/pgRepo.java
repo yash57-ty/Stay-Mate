@@ -14,4 +14,6 @@ public interface pgRepo extends JpaRepository<PgStore,Long> {
 
     @Query("SELECT p FROM PgStore p WHERE p.city = :city")
     List<PgStore> findBycity(@Param("city") String city);
+
+    List<PgStore> findByuserId(Long id);
 }

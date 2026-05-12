@@ -214,7 +214,6 @@ function PG() {
                 onChange={handelchange}
                 className="hidden"
               />
-
               🏡 Full Home
 
             </label>
@@ -263,9 +262,7 @@ function PG() {
                 onChange={handelchange}
                 className="hidden"
               />
-
               👧 Girls
-
             </label>
 
           </div>

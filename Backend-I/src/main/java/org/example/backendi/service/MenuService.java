@@ -14,9 +14,6 @@ public class MenuService {
     @Autowired
     MenuStoreRepository menuStoreRepository;
 
-    public void storeMenu(MenuStore menuStore){
-        menuStoreRepository.save(menuStore);
-    }
     private List<MenuResponse> convertToResponse(List<MenuStore> menus) {
         List<MenuResponse> responses = new ArrayList<>();
 
@@ -53,7 +50,6 @@ public class MenuService {
                 );
             }
         }
-
         return dp[a.length()][b.length()];
     }
 

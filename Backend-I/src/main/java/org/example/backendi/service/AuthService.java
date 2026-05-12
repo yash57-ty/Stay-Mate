@@ -41,21 +41,18 @@ public class AuthService {
         if (user == null || !user.getPassword().equals(request.password())) {
             throw new RuntimeException("Invalid phone or password");
         }
-        UserResponse userResponse=new UserResponse(user.getName(),user.getPhone(),user.getRole());
+        UserResponse userResponse=new UserResponse(user.getName(),user.getPhone(),user.getRole(),user.getGender());
         return userResponse;
     }
 
     public void resetPassword(String phone, String newPassword) {
         User user = userRepository.findByPhone(phone);
-
         if (user == null) {
             throw new RuntimeException("User not found");
         }
-
         if (newPassword == null || newPassword.isEmpty()) {
             throw new RuntimeException("Password cannot be empty");
         }
-
         user.setPassword(newPassword);
         userRepository.save(user);
     }

@@ -2,7 +2,9 @@ package org.example.backendi.service;
 
 import org.example.backendi.model.PgStore;
 import org.example.backendi.model.User;
+import org.example.backendi.model.dto.PgOwnerResponse;
 import org.example.backendi.model.dto.pgRequest;
+import org.example.backendi.model.dto.userPgResponse;
 import org.example.backendi.repo.UserRepository;
 import org.example.backendi.repo.pgRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,7 @@ public class PgService {
 
     @Autowired
     pgRepo pgRepo;
+
 
     public ResponseEntity<?> addpg(
             pgRequest pgRequest
@@ -179,5 +182,56 @@ public class PgService {
         return ResponseEntity.ok(
                 "PG Uploaded Successfully"
         );
+    }
+
+
+    public ResponseEntity<?> getpg(String gender,String city) {
+        if(gender.equals("male"))gender="boys";
+        else gender="girls";
+        String finalGender = gender;
+        List<PgStore> pgStores=pgRepo.findBycity(city).stream().
+                filter(pg->pg.getStatus().equals("confirmed")).
+                filter(pg->pg.getGender().equals(finalGender)).
+                toList();
+        List<userPgResponse>li=new ArrayList<>();
+        for(PgStore pg:pgStores){
+            userPgResponse upr=new userPgResponse(
+                    pg.getId(),
+                    pg.getAddress(),
+                    pg.getCapacity(),
+                    pg.getRent(),
+                    pg.getRentType(),
+                    pg.getUser().getEmail(),
+                    pg.getUser().getPhone(),
+                    pg.getHouseUrls().toArray(new String[0])
+            );
+            li.add(upr);
+        }
+        return ResponseEntity.ok(li);
+    }
+
+    public ResponseEntity<?> getManagePg(String phone) {
+        User user=userRepository.findByPhone(phone);
+        List<PgStore> pgStores=pgRepo.findByuserId(user.getId());
+        List<PgOwnerResponse>li=new ArrayList<>();
+        for (PgStore pg:pgStores) {
+            PgOwnerResponse upr=new PgOwnerResponse(
+                    pg.getId(),
+                    pg.getAddress(),
+                    pg.getCapacity()
+            );
+            li.add(upr);
+        }
+        return ResponseEntity.ok(li);
+    }
+
+    public ResponseEntity<?> updateCapacity(Long id, int capacity) {
+        PgStore pg=pgRepo.findById(id).orElse(null);
+        String cap=pg.getCapacity();
+        Integer result = Integer.valueOf(cap);
+        result-=capacity;
+        pg.setCapacity(result.toString());
+        pgRepo.save(pg);
+        return ResponseEntity.ok(result);
     }
 }

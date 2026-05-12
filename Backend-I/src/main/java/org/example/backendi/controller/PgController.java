@@ -29,4 +29,19 @@ public class PgController {
     public ResponseEntity<?> addPgRequestController(@ModelAttribute pgRequest pgRequest) throws IOException {
        return ResponseEntity.ok(pgService.addpg(pgRequest));
     }
+
+    @GetMapping("/getPg")
+    public ResponseEntity<?> getPgRequestController(@RequestParam String city,@RequestParam String gender) {
+        return pgService.getpg(gender,city);
+    }
+
+    @GetMapping("/managePg/{Phone}")
+    public ResponseEntity<?> getMangePgRequestController(@PathVariable String Phone) {
+        return pgService.getManagePg(Phone);
+    }
+
+    @PutMapping("/updateCap/{Id}")
+    public ResponseEntity<?> updatePgRequestController(@PathVariable Long Id,@RequestBody int capacity) {
+        return pgService.updateCapacity(Id,capacity);
+    }
 }

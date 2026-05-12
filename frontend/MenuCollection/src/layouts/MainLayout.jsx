@@ -7,7 +7,7 @@ export default function MainLayout({ children }) {
   // Determines correct home route based on user role
   const homePath =
     role === "Admin" ? "/admin-dashboard" : "/dashboard";
-
+  const gender=localStorage.getItem("gender")==="male"? "BOYS" : "GIRLS"
   const location = useLocation();
 
   // Resolves dynamic page title based on route
@@ -23,6 +23,10 @@ export default function MainLayout({ children }) {
         return "Pg Detail"
       case "/Pgform":
         return "Add PG Detail"
+      case "/Showpg":
+        return `pg for ${gender}`
+      case "/ManagePg":
+        return "Manage Pg"
       default:
         return "Dashboard";
     }

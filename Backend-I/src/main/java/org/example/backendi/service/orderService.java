@@ -169,7 +169,6 @@ public class orderService {
         order.setStatus("PARTIALLY_CANCELLED");
         orderRepo.save(order);
 
-
         wap.cancelOrderMessage(
                 order.getId(),
                 to,

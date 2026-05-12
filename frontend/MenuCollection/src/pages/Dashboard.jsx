@@ -38,7 +38,7 @@ function Dashboard() {
       <main className="max-w-6xl mx-auto px-6 py-12">
 
         {/* Navigation Pg */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
         
 
           {/* Menu navigation card */}
@@ -85,6 +85,30 @@ function Dashboard() {
               View History
             </button>
           </div>}
+
+          {role && <div
+          onClick={()=>navigate("/ManagePg")}
+            className="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-50"
+          >
+            <div className="bg-orange-50 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
+             🔑 
+            </div>
+
+            <h3 className="text-2xl font-black mb-2 tracking-tight">
+              PG
+            </h3>
+
+            <p className="text-gray-400 text-sm mb-8 leading-relaxed">
+              Manage Pg
+            </p>
+
+            <button className="text-sm font-black text-[#1A1D23] uppercase tracking-widest border-b-2 border-[#1A1D23] pb-1">
+              View History
+            </button>
+          </div>
+
+
+          }
 
 
           <div
