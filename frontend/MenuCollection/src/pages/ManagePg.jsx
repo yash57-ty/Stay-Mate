@@ -8,6 +8,7 @@ function ManagePg() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedPg, setSelectedPg] = useState(null);
   const [capacity, setCapacity] = useState(0);
+  const [action,setAction]=useState("increase")
 
   const handleUpdate = async () => {
 
@@ -18,8 +19,11 @@ function ManagePg() {
     return;
   }
 
+
   try {
-    const cap = Number(capacity);
+
+    let cap = Number(capacity);
+    cap= action==="increase" ? cap*-1 :cap 
     const res = await fetch(
       `http://localhost:8080/pg/updateCap/${selectedPg.Id}`,
       {
@@ -163,6 +167,77 @@ function ManagePg() {
               <p className="text-gray-500 mt-2">
                 Enter new capacity
               </p>
+              <div className="mt-6">
+
+  <p className="text-sm text-gray-500 mb-3">
+    Select Action
+  </p>
+
+  <div className="flex gap-4">
+
+    {/* INCREASE */}
+    <label
+      className={`flex-1 border rounded-2xl p-4 cursor-pointer transition ${
+        action === "increase"
+          ? "bg-black text-white border-black"
+          : "bg-white text-gray-700 border-gray-300"
+      }`}
+    >
+
+      <input
+        type="radio"
+        name="action"
+        value="increase"
+        checked={action === "increase"}
+        onChange={(e) => setAction(e.target.value)}
+        className="hidden"
+      />
+
+      <div className="flex items-center justify-center gap-2">
+
+        <span className="text-xl">⬆️</span>
+
+        <span className="font-semibold">
+          Increase
+        </span>
+
+      </div>
+
+    </label>
+
+    {/* DECREASE */}
+    <label
+      className={`flex-1 border rounded-2xl p-4 cursor-pointer transition ${
+        action === "decrease"
+          ? "bg-red-500 text-white border-red-500"
+          : "bg-white text-gray-700 border-gray-300"
+      }`}
+    >
+
+      <input
+        type="radio"
+        name="action"
+        value="decrease"
+        checked={action === "decrease"}
+        onChange={(e) => setAction(e.target.value)}
+        className="hidden"
+      />
+
+      <div className="flex items-center justify-center gap-2">
+
+        <span className="text-xl">⬇️</span>
+
+        <span className="font-semibold">
+          Decrease
+        </span>
+
+      </div>
+
+    </label>
+
+  </div>
+
+</div>
 
               {/* INPUT */}
               <div className="mt-8">
@@ -171,13 +246,16 @@ function ManagePg() {
                   Capacity
                 </label>
 
-                <input
-                  type="number"
-                  placeholder="Enter capacity"
-                  value={capacity}
-                  onChange={(e) => setCapacity(e.target.value)}
-                  className="w-full mt-2 border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-black"
+                <input 
+
                 />
+                <input
+  type="number"
+  placeholder="Enter capacity"
+  value={capacity}
+  onChange={(e) => setCapacity(e.target.value)}
+  className="w-full mt-2 border border-gray-300 rounded-2xl px-5 py-4 outline-none focus:ring-2 focus:ring-black"
+/>
 
               </div>
 
