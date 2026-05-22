@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 function Dashboard() {
   const navigate = useNavigate();
   const studentName = localStorage.getItem("name");
-  const role=localStorage.getItem("role")==="PGowner";
+  const role=localStorage.getItem("role")==="ROLE_PGOWNER";
   const handleLogout = () => {
     localStorage.clear();
     navigate("/login", { replace: true });

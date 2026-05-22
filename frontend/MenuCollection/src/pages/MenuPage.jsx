@@ -20,7 +20,9 @@ export default function MenuPage() {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const res = await fetch(`http://localhost:8080/webhook/api/cities`);
+        const res = await fetch(`http://localhost:8080/webhook/api/cities`,{
+          credentials:"include"
+        });
         const data = await res.json();
         setCities(data);
         setFilteredCities(data);
@@ -34,7 +36,9 @@ export default function MenuPage() {
   const fetchMenu = async (keyword = "", cityName = "") => {
     try {
       const res = await fetch(
-        `http://localhost:8080/api/message?keyword=${keyword}&city=${cityName}`
+        `http://localhost:8080/api/message?keyword=${keyword}&city=${cityName}`,{
+          credentials:"include"
+        }
       );
       const data = await res.json();
       setMenu(data);
@@ -80,9 +84,9 @@ export default function MenuPage() {
     try {
       const res = await fetch(`http://localhost:8080/api/response`, {
         method: "POST",
+        credentials:"include",
         headers: {
           "Content-Type": "application/json",
-          "X-USER-PHONE": localStorage.getItem("userPhone"),
         },
         body: JSON.stringify(payload),
       });

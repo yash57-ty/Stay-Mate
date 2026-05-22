@@ -25,7 +25,10 @@ function Admin() {
   const fetchRestaurant = async () => {
     try {
       const res = await fetch(
-        `http://localhost:8080/admin/getRestaurant?page=${page}&size=${pageSize}&month=${month}`
+        `http://localhost:8080/admin/getRestaurant?page=${page}&size=${pageSize}&month=${month}`,
+        {
+          credentials:"include"
+        }
       );
       const data = await res.json();
       setRestaurants(data);
@@ -43,6 +46,7 @@ function Admin() {
       headers: {
         "Content-Type": "application/json"
       },
+      credentials:"include",
       body: JSON.stringify(formData)
     });
 

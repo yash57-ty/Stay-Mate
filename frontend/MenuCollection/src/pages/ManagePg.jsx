@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 
 function ManagePg() {
 
-  const phone = localStorage.getItem("userPhone");
 
   const [pg, setPg] = useState([]);
   const [openModal, setOpenModal] = useState(false);
@@ -31,6 +30,7 @@ function ManagePg() {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials:"include",
         body: JSON.stringify(cap),
       }
     );
@@ -57,7 +57,9 @@ function ManagePg() {
       try {
 
         const res = await fetch(
-          `http://localhost:8080/pg/managePg/${phone}`
+          `http://localhost:8080/pg/managePg`,{
+            credentials:"include"
+          }
         );
 
         const data = await res.json();

@@ -1,5 +1,6 @@
 package org.example.backendi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,7 @@ public class User {
     @Column(nullable = false, unique = true)
     private String phone;
 
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
@@ -31,6 +33,4 @@ public class User {
     String gender;
 
     private String role;
-
-
 }

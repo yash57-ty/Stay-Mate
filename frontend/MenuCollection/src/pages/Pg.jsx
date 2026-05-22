@@ -16,7 +16,9 @@ function Pg() {
     async function fetchCity() {
       try {
         const res = await fetch(
-          "http://localhost:8080/admin/getPgCities"
+          "http://localhost:8080/admin/getPgCities",{
+            credentials:"include"
+          }
         );
         const data = await res.json();
         setCities(data);
@@ -36,6 +38,7 @@ function Pg() {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials:"include",
           body: id + "",
         });
         const data = await res.text();
@@ -53,7 +56,9 @@ function Pg() {
       try {
 
         const res = await fetch(
-          `http://localhost:8080/admin/getPg?city=${city}`
+          `http://localhost:8080/admin/getPg?city=${city}`,{
+            credentials:"include"
+          }
         );
         const data = await res.json();
         

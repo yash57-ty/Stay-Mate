@@ -98,7 +98,6 @@ function Signup() {
       name="role"
       type="checkbox"
       checked={form.role}
-      required
       onChange={handelchecked}
       className="w-5 h-5 accent-[#FF4757] rounded-md cursor-pointer"
     />

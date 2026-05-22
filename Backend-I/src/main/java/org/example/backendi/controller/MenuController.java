@@ -8,13 +8,13 @@ import org.example.backendi.service.orderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 
-@CrossOrigin(origins = "*")
 @RestController
 public class MenuController {
 
@@ -36,35 +36,33 @@ public class MenuController {
     @PostMapping("api/response")
     public ResponseEntity<?> fetchdata(
             @RequestBody orderRequest request,
-            @RequestHeader(value = "X-USER-PHONE", required = false) String userPhone
+            Authentication authentication
     ) {
 
-        System.out.print(userPhone);
-        if (userPhone == null || userPhone.isBlank()) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Missing X-USER-PHONE header");
-        }
+        String userPhone = authentication.getName();
 
         try {
-            OrderResponse response =orderService.fetchorder(request, userPhone);
-            return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(e.getMessage());
 
-        } catch (RuntimeException e) {
+            OrderResponse response =
+                    orderService.fetchorder(
+                            request,
+                            userPhone
+                    );
+
+            return ResponseEntity.ok(response);
+
+        } catch (Exception e) {
+
             return ResponseEntity
-                    .status(HttpStatus.CONFLICT)
+                    .badRequest()
                     .body(e.getMessage());
         }
     }
     @GetMapping("api/orders")
     public ResponseEntity<?> getOrders(
-            @RequestHeader(value = "X-USER-PHONE", required = false) String userPhone
+           Authentication authentication
     ) {
-
+        String userPhone=authentication.getName();
         if (userPhone == null || userPhone.isBlank()) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
@@ -87,8 +85,9 @@ public class MenuController {
     public ResponseEntity<?> cancelOrder(
             @PathVariable Long orderId,
             @RequestBody Map<String,Integer> body,
-            @RequestHeader("X-USER-PHONE") String phone
+           Authentication authentication
     ){
+        String phone=authentication.getName();
 
         try {
 

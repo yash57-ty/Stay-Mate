@@ -35,7 +35,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute allowedRole={["User","PGowner"]}>
+            <ProtectedRoute allowedRole={["ROLE_USER","ROLE_PGOWNER"]}>
               <Dashboard />
             </ProtectedRoute>
           }
@@ -44,7 +44,7 @@ function App() {
         <Route
         path="/Showpg"
         element={
-          <ProtectedRoute allowedRole={["User","PGowner","Admin"]}>
+          <ProtectedRoute allowedRole={["ROLE_PGOWNER","ROLE_USER","ROLE_ADMIN"]}>
             <MainLayout>
             <Showpg/>
             </MainLayout>
@@ -54,7 +54,7 @@ function App() {
         <Route
         path="/ManagePg"
         element={
-          <ProtectedRoute allowedRole="PGowner">
+          <ProtectedRoute allowedRole="ROLE_PGOWNER">
             <MainLayout>
               <ManagePg/>
             </MainLayout> 
@@ -65,7 +65,7 @@ function App() {
         <Route
           path="/Pgform"
           element={
-            <ProtectedRoute allowedRole="PGowner">
+            <ProtectedRoute allowedRole="ROLE_PGOWNER">
               <MainLayout>
             <Pgform/>
             </MainLayout>
@@ -77,7 +77,7 @@ function App() {
         <Route
           path="/Admin-dashboard"
           element={
-            <ProtectedRoute allowedRole="Admin">
+            <ProtectedRoute allowedRole="ROLE_ADMIN">
               <AdminDashboard />
             </ProtectedRoute>
           }
@@ -87,7 +87,7 @@ function App() {
         <Route
         path="/pg"
         element={
-          <ProtectedRoute allowedRole="Admin">
+          <ProtectedRoute allowedRole="ROLE_ADMIN">
             <MainLayout>
               <Pg/>
               </MainLayout>
@@ -99,7 +99,7 @@ function App() {
         <Route
           path="/admin"
           element={
-            <ProtectedRoute allowedRole="Admin">
+            <ProtectedRoute allowedRole="ROLE_ADMIN">
               <MainLayout>
               <Admin />
               </MainLayout>

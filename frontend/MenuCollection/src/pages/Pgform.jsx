@@ -74,6 +74,7 @@ function PG() {
         const res=await fetch("http://localhost:8080/pg/add",{
           method:"POST",
           body:data,
+          credentials:"include",
         });
 
         const result=await res.text();

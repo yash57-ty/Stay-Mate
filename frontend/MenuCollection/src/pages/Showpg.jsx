@@ -19,7 +19,9 @@ function Showpg() {
       async function fetchCity() {
         try {
           const res = await fetch(
-            "http://localhost:8080/admin/getPgCities"
+            "http://localhost:8080/pg/getPgCities",{
+              credentials:"include"
+            }
           );
           const data = await res.json();
           setCities(data);
@@ -41,7 +43,9 @@ function Showpg() {
         setLoading(true);
 
         const res = await fetch(
-          `http://localhost:8080/pg/getPg?city=${city}&gender=${gender}`
+          `http://localhost:8080/pg/getPg?city=${city}&gender=${gender}`,{
+            credentials:"include"
+          }
         );
 
         const data = await res.json();

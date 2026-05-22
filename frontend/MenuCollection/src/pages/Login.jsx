@@ -24,9 +24,12 @@ function Login() {
 
     try {
       const res = await fetch("http://localhost:8080/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+       credentials:"include",
+       body: JSON.stringify(form),
       });
 
       if (!res.ok) {
@@ -44,9 +47,9 @@ function Login() {
       localStorage.setItem("userPhone", user.phone);
       localStorage.setItem("gender",user.gender);
 
-      if (user.role === "User" || user.role === "PGowner") {
+      if (user.role === "ROLE_USER" || user.role === "ROLE_PGOWNER") {
         navigate("/dashboard", { replace: true });
-      } else if (user.role === "Admin") {
+      } else if (user.role === "ROLE_ADMIN") {
         navigate("/Admin-dashboard", { replace: true });
       } 
 

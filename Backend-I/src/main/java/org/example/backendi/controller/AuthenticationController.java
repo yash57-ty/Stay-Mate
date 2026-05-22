@@ -1,5 +1,6 @@
 package org.example.backendi.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.example.backendi.model.User;
 import org.example.backendi.model.dto.LoginRequest;
 import org.example.backendi.model.dto.SignupRequest;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "*")
 public class AuthenticationController {
     @Autowired
     private AuthService authService;
@@ -25,8 +25,17 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        UserResponse userResponse = authService.login(request);
+    public ResponseEntity<?> login(
+            @RequestBody LoginRequest request,
+            HttpServletRequest httpRequest
+    ) {
+
+        UserResponse userResponse =
+                authService.login(
+                        request,
+                        httpRequest
+                );
+
         return ResponseEntity.ok(userResponse);
     }
 

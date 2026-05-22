@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/webhook")
 public class RestaurantController {
     private static final String VERIFY_TOKEN = "my_verify_token";
@@ -65,7 +64,6 @@ public class RestaurantController {
         }
         return ResponseEntity.ok("EVENT_RECEIVED");
     }
-
 
 
     @GetMapping("api/cities")
