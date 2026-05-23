@@ -79,12 +79,10 @@ public class AuthService {
                         .SPRING_SECURITY_CONTEXT_KEY,
                 context
         );
-
         User user =
                 userRepository.findByPhone(
                         request.phone()
                 );
-
         return new UserResponse(
                 user.getName(),
                 user.getPhone(),

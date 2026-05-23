@@ -192,6 +192,7 @@ public class PgService {
         List<PgStore> pgStores=pgRepo.findBycity(city).stream().
                 filter(pg->pg.getStatus().equals("confirmed")).
                 filter(pg->pg.getGender().equals(finalGender)).
+                filter(pg->Integer.valueOf(pg.getCapacity())>0).
                 toList();
         List<userPgResponse>li=new ArrayList<>();
         for(PgStore pg:pgStores){

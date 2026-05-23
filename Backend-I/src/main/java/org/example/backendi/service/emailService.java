@@ -14,7 +14,6 @@ class emailService {
         message.setTo(to);
         message.setSubject("Order Cancelled");
         message.setText("Your order #" + orderId + " has been cancelled by the restaurant.");
-
         mailSender.send(message);
     }
 }

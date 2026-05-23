@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 function ManagePg() {
-
-
+  
   const [pg, setPg] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedPg, setSelectedPg] = useState(null);
@@ -10,14 +9,10 @@ function ManagePg() {
   const [action,setAction]=useState("increase")
 
   const handleUpdate = async () => {
-
   if (Number(capacity) > Number(selectedPg.capacity)) {
-
     alert("Capacity cannot be greater than actual capacity");
-
     return;
   }
-
 
   try {
 
