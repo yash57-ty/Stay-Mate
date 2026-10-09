@@ -46,7 +46,6 @@ public class AuthService {
         }
         else user.setRole("ROLE_USER");
         user.setPassword(passwordEncoder.encode(request.password()));
-
         userRepository.save(user);
     }
 
@@ -54,10 +53,8 @@ public class AuthService {
             LoginRequest request,
             HttpServletRequest httpRequest
     ) {
-
         Authentication authentication =
                 authenticationManager.authenticate(
-
                         new UsernamePasswordAuthenticationToken(
                                 request.phone(),
                                 request.password()
@@ -66,7 +63,6 @@ public class AuthService {
 
         SecurityContext context =
                 SecurityContextHolder.createEmptyContext();
-
         context.setAuthentication(authentication);
 
         SecurityContextHolder.setContext(context);
@@ -79,6 +75,7 @@ public class AuthService {
                         .SPRING_SECURITY_CONTEXT_KEY,
                 context
         );
+
         User user =
                 userRepository.findByPhone(
                         request.phone()

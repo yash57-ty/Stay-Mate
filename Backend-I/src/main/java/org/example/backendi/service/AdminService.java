@@ -27,6 +27,7 @@ public class AdminService {
     pgRepo pgRepo;
 
 
+
     public ResponseEntity<?> addRestaurant(RestaurantRequest restaurantRequest) {
 
         Restaurant restaurant = new Restaurant();
@@ -41,11 +42,11 @@ public class AdminService {
         return ResponseEntity.ok().build();
     }
 
+
     public List<AdminResponse> getRestaurant(int page, int size, String month) {
 
         List<Restaurant> restaurants = restaurantRepository.findAll();
         List<MenuStore> menuStores = menuStoreRepository.findAll();
-
         HashMap<Long, AdminResponse> resultMap = new HashMap<>();
 
         // Initialize restaurant stats
@@ -62,22 +63,16 @@ public class AdminService {
             );
         }
 
-        // Calculate orders and revenue
         for (MenuStore menuStore : menuStores) {
-
             Long restaurantId = menuStore.getRestaurant().getId();
-
             if (!resultMap.containsKey(restaurantId)) continue;
 
             if (month != null && !month.isEmpty()) {
-
                 String menuMonth = menuStore.getCreatedDate().toString().substring(0, 7);
-
                 if (!menuMonth.equals(month)) {
                     continue;
                 }
             }
-
             int order = menuStore.getOrerCount();
             int revenue = order * menuStore.getPrice();
 
@@ -99,10 +94,8 @@ public class AdminService {
             );
         }
 
-        // Convert to list
         List<AdminResponse> allRestaurants = new ArrayList<>(resultMap.values());
 
-        // Pagination
         int start = page * size;
         int end = Math.min(start + size, allRestaurants.size());
 
@@ -168,4 +161,6 @@ public class AdminService {
         System.out.println(pgStore);
         return ResponseEntity.ok(pgStore.getStatus());
     }
+
+
 }

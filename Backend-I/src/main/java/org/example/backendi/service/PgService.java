@@ -156,25 +156,15 @@ public class PgService {
         String billUrl =
                 "/uploads/" + billName;
 
-
         PgStore pg = new PgStore();
-
         pg.setAddress(pgRequest.address());
-
         pg.setRent(pgRequest.rent());
-
         pg.setRentType(pgRequest.rentType());
-
         pg.setCapacity(pgRequest.capacity());
-
         pg.setCity(pgRequest.city());
-
         pg.setGender(pgRequest.gender());
-
         pg.setHouseUrls(imageUrls);
-
         pg.setElectricityBillUrls(billUrl);
-
         pg.setUser(user);
         pg.setStatus("pending");
         pgRepo.save(pg);
@@ -183,7 +173,6 @@ public class PgService {
                 "PG Uploaded Successfully"
         );
     }
-
 
     public ResponseEntity<?> getpg(String gender,String city) {
         if(gender.equals("male"))gender="boys";

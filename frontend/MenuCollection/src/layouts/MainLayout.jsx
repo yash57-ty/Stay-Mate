@@ -5,8 +5,11 @@ export default function MainLayout({ children }) {
   const role = localStorage.getItem("role");
 
   // Determines correct home route based on user role
-  const homePath =
-    role === "Admin" ? "/admin-dashboard" : "/dashboard";
+
+const homePath =
+  role === "ROLE_ADMIN"
+    ? "/Admin-dashboard"
+    : "/dashboard";
   const gender=localStorage.getItem("gender")==="male"? "BOYS" : "GIRLS"
   const location = useLocation();
 

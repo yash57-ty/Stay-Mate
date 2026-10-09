@@ -143,11 +143,6 @@ public class RestaurantService {
                 return;
             }
 
-            /*
-            ============================
-            STATE MACHINE
-            ============================
-            */
 
             switch (menu_session.getCurrent_status()) {
 
@@ -257,12 +252,9 @@ public class RestaurantService {
                     break;
 
                 case "COMPLETED":
-
                     wap.sendText(phone, "ℹ Menu already configured. Type RESET to reconfigure.");
                     break;
-
                 default:
-
                     wap.sendText(phone, "❓ Unknown state. Type RESET.");
 
             }

@@ -100,9 +100,7 @@ function Login() {
           <h2 className="text-4xl font-black tracking-tight mb-2">Welcome</h2>
           <p className="text-gray-400 font-medium">Log in to your account</p>
         </div>
-
         <form onSubmit={handleSubmit} className="space-y-6">
-          
           <div>
             <input
               type="text"

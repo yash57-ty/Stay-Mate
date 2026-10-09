@@ -33,22 +33,18 @@ public class RestaurantController {
         try {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode rootNode = mapper.readTree(payload);
-
             JsonNode entryArray = rootNode.path("entry");
             if (!entryArray.isArray() || entryArray.isEmpty()) {
                 return ResponseEntity.ok("NO_ENTRY");
             }
-
             JsonNode changesArray = entryArray.get(0).path("changes");
             if (!changesArray.isArray() || changesArray.isEmpty()) {
                 return ResponseEntity.ok("NO_CHANGES");
             }
-
             JsonNode messagesArray =
                     changesArray.get(0)
                             .path("value")
                             .path("messages");
-
             if (!messagesArray.isArray()) {
                 return ResponseEntity.ok("NO_MESSAGES");
             }
@@ -65,10 +61,8 @@ public class RestaurantController {
         return ResponseEntity.ok("EVENT_RECEIVED");
     }
 
-
     @GetMapping("api/cities")
     List<String> fetchcity() {
         return restaurantService.fetchcity();
     }
-
 }

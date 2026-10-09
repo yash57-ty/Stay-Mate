@@ -21,18 +21,10 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
-
         DaoAuthenticationProvider provider =
                 new DaoAuthenticationProvider();
-
-        provider.setUserDetailsService(
-                customUserDetailsService
-        );
-
-        provider.setPasswordEncoder(
-                passwordEncoder()
-        );
-
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
 
@@ -40,7 +32,6 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration config
     ) throws Exception {
-
         return config.getAuthenticationManager();
     }
 
@@ -53,23 +44,19 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http
     ) throws Exception {
-
         http
                 .csrf(csrf -> csrf.disable())
-
                 .authorizeHttpRequests(auth -> auth
-
                         .requestMatchers(
                                 "/auth/**",
                                 "/webhook/**",
                                 "/pg/getPg",
                                 "/pg/getPgCities",
-                                "/api/message"
+                                "/api/ai-menu/**",
+                                "/error"
                         ).permitAll()
-
                         .requestMatchers("/admin/**")
                         .hasRole("ADMIN")
-
                         .requestMatchers(
                                 "/api/orders/**",
                                 "/api/response"
@@ -79,7 +66,6 @@ public class SecurityConfig {
                                 "ADMIN",
                                 "PGOWNER"
                         )
-
                         .requestMatchers(
                                 "/pg/managePg/**",
                                 "/pg/updateCap/**"
@@ -87,14 +73,11 @@ public class SecurityConfig {
                                 "ADMIN",
                                 "PGOWNER"
                         )
-
                         .requestMatchers("/pg/add")
                         .hasAnyRole("PGOWNER","ADMIN")
-
                         .anyRequest()
                         .authenticated()
                 )
-
                 .sessionManagement(session ->
                         session.maximumSessions(1)
                 )

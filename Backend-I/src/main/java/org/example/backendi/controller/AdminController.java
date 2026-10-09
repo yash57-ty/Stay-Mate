@@ -18,6 +18,7 @@ public class AdminController {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     AdminService adminService;
 
@@ -37,7 +38,6 @@ public class AdminController {
         return adminService.getRestaurant(page, size, month);
     }
 
-    
     @GetMapping("/getPgCities")
     public ResponseEntity<List<String>> getAllPgCitiesController(){
         return adminService.getpgcities();

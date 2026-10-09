@@ -10,7 +10,7 @@ function AdminDashboard() {
     navigate("/login", { replace: true });
   };
 
-  return (
+  return (  
     <div className="min-h-screen bg-[#F9F9F9] text-[#1A1D23]">
 
       {/* Top navigation bar */}

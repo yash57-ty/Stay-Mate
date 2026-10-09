@@ -6,8 +6,10 @@ export default function RestaurantCard({
   disabled,
   isExpanded,
   onToggle,
+  onViewPhotos,
 }) {
-  const isLimitReached = restaurant.orderCount >= restaurant.limit;
+  const isLimitReached =
+    restaurant.orderCount >= restaurant.limit;
 
   return (
     <div
@@ -15,11 +17,12 @@ export default function RestaurantCard({
         isExpanded ? "shadow-xl" : "hover:shadow-md"
       }`}
     >
-      {/* ===== TOP ROW (LIKE SWIGGY LIST) ===== */}
+      {/* ===== TOP ROW ===== */}
       <div
         onClick={onToggle}
         className="flex items-center justify-between px-4 py-4 cursor-pointer"
       >
+
         {/* LEFT */}
         <div className="flex flex-col flex-1 min-w-0">
           <h3 className="text-sm sm:text-lg font-semibold truncate">
@@ -33,18 +36,23 @@ export default function RestaurantCard({
 
         {/* RIGHT */}
         <div className="flex items-center gap-3">
+
           <div className="text-right">
+
             <p className="text-sm sm:text-lg font-bold text-[#FF4757]">
               ₹{restaurant.price}
             </p>
 
             <p
               className={`text-xs font-medium ${
-                isLimitReached ? "text-red-500" : "text-green-600"
+                isLimitReached
+                  ? "text-red-500"
+                  : "text-green-600"
               }`}
             >
               {isLimitReached ? "Closed" : "Open"}
             </p>
+
           </div>
 
           {isExpanded ? (
@@ -52,44 +60,81 @@ export default function RestaurantCard({
           ) : (
             <ChevronDown size={18} />
           )}
+
         </div>
       </div>
 
       {/* ===== EXPANDED SECTION ===== */}
       {isExpanded && (
         <div className="px-5 pb-5 animate-fadeIn">
+
           <div className="h-px bg-gray-100 mb-4" />
 
           {/* MENU TEXT */}
           <div className="bg-gray-50 rounded-xl p-4 mb-4">
+
             <p className="text-sm text-gray-600 whitespace-pre-wrap leading-relaxed">
               {restaurant.message}
             </p>
+
           </div>
 
-          {/* BOTTOM */}
+          {/* ===== VIEW MENU PHOTOS ===== */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+
+              if (onViewPhotos) {
+                onViewPhotos();
+              }
+            }}
+            className="w-full mb-5 py-3 rounded-xl border border-[#FF4757] text-[#FF4757] font-semibold text-sm hover:bg-[#FF4757] hover:text-white transition"
+          >
+            📸 View Menu Photos
+          </button>
+
+          {/* ===== BOTTOM ===== */}
           <div className="flex items-center justify-between">
+
             <div>
-              <p className="text-xs text-gray-400 uppercase">Price</p>
-              <p className="text-lg font-bold">₹{restaurant.price}</p>
+
+              <p className="text-xs text-gray-400 uppercase">
+                Price
+              </p>
+
+              <p className="text-lg font-bold">
+                ₹{restaurant.price}
+              </p>
+
             </div>
 
+            {/* ORDER BUTTON */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                if (!isLimitReached && !disabled) onSelect();
+
+                if (
+                  !isLimitReached &&
+                  !disabled
+                ) {
+                  onSelect();
+                }
               }}
+              disabled={isLimitReached || disabled}
               className={`px-5 py-2 rounded-xl text-sm font-semibold transition ${
-                isLimitReached
-                  ? "bg-gray-200 text-gray-400"
+                isLimitReached || disabled
+                  ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                   : "bg-[#FF4757] text-white hover:bg-[#ff2e43]"
               }`}
             >
               {isLimitReached ? "Closed" : "Order"}
             </button>
+
           </div>
+
         </div>
       )}
+
     </div>
   );
 }
